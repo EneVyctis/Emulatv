@@ -2,8 +2,7 @@ function ServiceBlocks(props) {
   return (
     <div>
     <h1>{props.name}</h1>
-    <p>{props.id}</p>
-    <p>{props.website}</p>
+    <a href={props.website}>button</a>
     </div>
   );
 }
