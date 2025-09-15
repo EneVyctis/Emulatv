@@ -21,6 +21,23 @@ var services = []service{
 	{ID: "2", Name: "Crunchyroll", Website: "https://www.crunchyroll.com/"},
 }
 
+// CORS Handler
+func CorsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, Authorization")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PATCH, DELETE, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func listServices(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, services)
 }
@@ -63,6 +80,7 @@ func main() {
 	router := gin.Default()
 
 	// Link path with handler functions
+	router.Use(CorsMiddleware())
 	router.GET("/list/services", listServices)
 	router.GET("/list/service/:id", getServiceById)
 	router.GET("/navigation/next", goNext)
