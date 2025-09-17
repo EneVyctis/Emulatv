@@ -24,7 +24,7 @@ var services = []service{
 // CORS Handler
 func CorsMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, Authorization")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PATCH, DELETE, PUT")
@@ -63,7 +63,9 @@ func goNext(c *gin.Context) {
 }
 
 func goPrevious(c *gin.Context) {
-	robotgo.KeyTap("shift", "tab")
+	robotgo.KeyDown("shift")
+	robotgo.KeyTap("tab")
+	robotgo.KeyUp("shift")
 }
 
 func goEnter(c *gin.Context) {
@@ -83,7 +85,9 @@ func main() {
 	router.Use(CorsMiddleware())
 	router.GET("/list/services", listServices)
 	router.GET("/list/service/:id", getServiceById)
+	router.Use(CorsMiddleware())
 	router.GET("/navigation/next", goNext)
+	router.Use(CorsMiddleware())
 	router.GET("/navigation/previous", goPrevious)
 	router.GET("navigation/enter", goEnter)
 	router.GET("navigation/escape", goEscape)
