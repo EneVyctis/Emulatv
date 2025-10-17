@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import './components/ServiceBlocks'
-import ServiceBlocks from './components/ServiceBlocks'
+import ServiceBlocks, {Service} from "./components/ServiceBlocks"
+import "./components/ServiceBlocks.css"
 
 function App() {
   const [services, setServices] = useState([]);
+  const ip = import.meta.env.VITE_IP;
+  const port = import.meta.env.VITE_PORT;
 
   useEffect(() => {
-    const url = "http://localhost:8080/list/services";
+    const url = "http://"+ip+":"+port+"/list/services";
 
     const fetchData = async () => {
       try {
@@ -25,9 +25,13 @@ function App() {
   }, []);
   
   return (
-    <div>
-      {services.map( (service) => (
-        <ServiceBlocks key={service.id} id={service.id} name={service.name} website={service.website} />
+      <div className="service-grid">
+      {services.map((service) => (
+        <ServiceBlocks
+          key={service.id}
+          name={service.name}
+          website={service.website}
+        />
       ))}
     </div>
   );

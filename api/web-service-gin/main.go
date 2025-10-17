@@ -2,9 +2,11 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vgo/robotgo"
+	"github.com/joho/godotenv"
 )
 
 // Services
@@ -19,6 +21,7 @@ var services = []service{
 	{ID: "0", Name: "Netflix", Website: "https://www.netflix.com"},
 	{ID: "1", Name: "Youtube", Website: "https://www.youtube.com/"},
 	{ID: "2", Name: "Crunchyroll", Website: "https://www.crunchyroll.com/"},
+	{ID: "3", Name: "Disney+", Website: "https://www.disneyplus.com/fr-fr"},
 }
 
 // CORS Handler
@@ -76,8 +79,19 @@ func goEscape(c *gin.Context) {
 	robotgo.KeyTap("escape")
 }
 
-func main() {
+func goVolumeUp(c *gin.Context) {
+	robotgo.KeyTap("up")
+}
 
+func goVolumeDown(c *gin.Context) {
+	robotgo.KeyTap("down")
+}
+
+func main() {
+	//Get env variables
+	godotenv.Load()
+	var ip string = os.Getenv("IP")
+	var port string = os.Getenv("PORT")
 	// Initialize default route
 	router := gin.Default()
 
@@ -85,13 +99,13 @@ func main() {
 	router.Use(CorsMiddleware())
 	router.GET("/list/services", listServices)
 	router.GET("/list/service/:id", getServiceById)
-	router.Use(CorsMiddleware())
 	router.GET("/navigation/next", goNext)
-	router.Use(CorsMiddleware())
 	router.GET("/navigation/previous", goPrevious)
-	router.GET("navigation/enter", goEnter)
-	router.GET("navigation/escape", goEscape)
+	router.GET("/navigation/volume/up", goVolumeUp)
+	router.GET("/navigation/volume/down", goVolumeDown)
+	router.GET("/navigation/enter", goEnter)
+	router.GET("/navigation/escape", goEscape)
 
 	// Attach the router to an http server and start the server
-	router.Run("localhost:8080")
+	router.Run(ip + ":" + port)
 }

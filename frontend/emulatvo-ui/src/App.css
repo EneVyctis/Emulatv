@@ -5,6 +5,17 @@
   text-align: center;
 }
 
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
