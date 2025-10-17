@@ -7,7 +7,7 @@ import remoteStyles from './Remote.module.css'
 
 function App() {
   const ip = import.meta.env.VITE_IP;
-  const port = import.meta.env.VITe_PORT;
+  const port = import.meta.env.VITE_PORT;
   return (
     <>
     <div className={remoteStyles.grid}>
