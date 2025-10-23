@@ -1,6 +1,6 @@
 import "./ServiceBlocks.css"
 function ServiceBlocks(props) {
-  const imageUrl = `/${props.name}.svg`;
+  const imageUrl = `${import.meta.env.BASE_URL}${props.name}.svg`;
 
   return (
     <a

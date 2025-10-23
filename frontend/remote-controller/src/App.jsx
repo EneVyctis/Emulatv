@@ -3,8 +3,6 @@ import './App.css'
 import RemoteButton from './components/RemoteButton'
 
 function App() {
-  const ip = import.meta.env.VITE_IP;
-  const port = import.meta.env.VITE_PORT;
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center bg-gray-500 p-12">
       
@@ -14,31 +12,31 @@ function App() {
         <RemoteButton
           className="bg-gray-700 hover:bg-gray-600 text-black w-20 h-20 flex items-center justify-center rounded-xl shadow-md active:scale-95 transition text-2xl"
           label="Vol +"
-          endpoint={`http://${ip}:${port}/navigation/volume/up`}
+          endpoint={`/api/navigation/volume/up`}
         />
         <div></div>
 
         <RemoteButton
           className="bg-gray-700 hover:bg-gray-600 text-black w-20 h-20 flex items-center justify-center rounded-xl shadow-md active:scale-95 transition text-2xl"
           label="◀"
-          endpoint={`http://${ip}:${port}/navigation/previous`}
+          endpoint={`/api/navigation/previous`}
         />
         <RemoteButton
           className="bg-blue-600 hover:bg-blue-500 text-black w-24 h-24 flex items-center justify-center rounded-full shadow-lg text-xl font-bold active:scale-95 transition"
           label="OK"
-          endpoint={`http://${ip}:${port}/navigation/enter`}
+          endpoint={`/api/navigation/enter`}
         />
         <RemoteButton
           className="bg-gray-700 hover:bg-gray-600 text-black w-20 h-20 flex items-center justify-center rounded-xl shadow-md active:scale-95 transition text-2xl"
           label="▶"
-          endpoint={`http://${ip}:${port}/navigation/next`}
+          endpoint={`/api/navigation/next`}
         />
 
         <div></div>
         <RemoteButton
           className="bg-gray-700 hover:bg-gray-600 text-black w-20 h-20 flex items-center justify-center rounded-xl shadow-md active:scale-95 transition text-2xl"
           label="Vol -"
-          endpoint={`http://${ip}:${port}/navigation/volume/down`}
+          endpoint={`/api/navigation/volume/down`}
         />
         <div></div>
       </div>
@@ -47,7 +45,7 @@ function App() {
       <RemoteButton
         className="bg-red-700 hover:bg-red-600 text-black px-8 py-3 rounded-lg shadow-md active:scale-95 transition text-lg"
         label="⎋ Escape"
-        endpoint={`http://${ip}:${port}/navigation/escape`}
+        endpoint={`/api/navigation/escape`}
       />
     </div>
   );
