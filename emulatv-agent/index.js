@@ -2,7 +2,7 @@ import express, { json } from "express";
 import { keyboard, Key, sleep } from "@nut-tree-fork/nut-js";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.NODE_API_PORT || 3001;
 
 // Middleware JSON
 app.use(json());

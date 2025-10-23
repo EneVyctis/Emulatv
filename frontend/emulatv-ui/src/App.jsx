@@ -9,11 +9,11 @@ function App() {
   const port = import.meta.env.VITE_PORT;
 
   useEffect(() => {
-    const url = "http://"+ip+":"+port+"/list/services";
+    const endpoint = "/api/list/services";
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(endpoint);
         const json = await response.json();
         setServices(json);
       } catch (error) {

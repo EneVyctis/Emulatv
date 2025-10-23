@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  emulatv-ui:
+    build: ./frontend/emulatv-ui
+    container_name: emulatv-ui
+    ports:
+      - "8080:80"
+    depends_on:
+      - emulatv-api
+    networks:
+      - emulatv
+
+  emulatv-api:
+    build: ./api/emulatv-api
+    container_name: emulatv-api
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_API_IP=emulatv-agent
+      - NODE_API_PORT=3001
+    networks:
+      - emulatv
+
+networks:
+  emulatv:
+    driver: bridge
