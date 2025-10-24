@@ -25,9 +25,6 @@ echo -e "${GREEN}✅ Successfully started agent (PID: $AGENT_PID)${NC}"
 echo -e "${GREEN}➡️  Starting docker containers...${NC}"
 docker compose -f "$COMPOSE_FILE" up -d || { echo -e "${RED}❌ Error while running docker compose"; kill $AGENT_PID; exit 1; }
 
-echo -e "${GREEN}✅ Everything is up !${NC}"
-echo -e "${YELLOW}👉 Hit a key to stop...${NC}"
-
 # === Open browser ===
 echo -e "${GREEN}🌐 Opening of ${APP_URL} in browser...${NC}"
 
@@ -39,10 +36,9 @@ else
   echo -e "${YELLOW}⚠️  Cannot automatically open browser. Manually open : ${APP_URL}${NC}"
 fi
 
-# === ATTENTE D'UNE TOUCHE ===
+echo -e "${GREEN}✅ Everything is up !${NC}"
+echo -e "${YELLOW}👉 Hit a key to stop...${NC}"
 read -n 1 -s
-
-# === ARRÊT DE TOUT ===
 echo -e "${YELLOW}🛑 Stopping processes...${NC}"
 
 docker compose -f "$COMPOSE_FILE" down
