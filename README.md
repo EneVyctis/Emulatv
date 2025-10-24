@@ -19,4 +19,9 @@ You can control it through a web app on you personal phone in the same local net
 
 # How to run
 
-Emulatv will be soon directly available through a dockercompose.
+*Make sure you have docker installed on your device.*
+
+```sh
+chmod u+x run-emulatv.sh
+./run-emulatv.sh
+```

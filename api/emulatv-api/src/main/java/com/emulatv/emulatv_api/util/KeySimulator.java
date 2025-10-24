@@ -1,5 +1,8 @@
 package com.emulatv.emulatv_api.util;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -7,24 +10,24 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class KeySimulator {
 
-    private final String agentIp;
-    private final String agentPort;
+    private static final Logger log = LoggerFactory.getLogger(KeySimulator.class);
     private final RestTemplate restTemplate;
+    private final String baseUrl;
 
-    public KeySimulator(
-            @Value("${node.api.ip}") String agentIp,
-            @Value("${node.api.port}") String agentPort
-    ) {
-        this.agentIp = agentIp;
-        this.agentPort = agentPort;
+    public KeySimulator(@Value("${agent.base-url:http://emulatv-nginx/agent/}") String baseUrl) {
         this.restTemplate = new RestTemplate();
+        this.baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     }
-
-    private String getAgentUrl() {
-        return "http://" + agentIp + ":" + agentPort;
-    }
-
-    public void getRequest(String url) {
-        restTemplate.getForObject(getAgentUrl() + url, String.class);
+    
+    public String getRequest(String path) {
+        String fullUrl = baseUrl + path;
+        try {
+            String response = restTemplate.getForObject(fullUrl, String.class);
+            log.info("Agent response from {}: {}", fullUrl, response);
+            return response;
+        } catch (Exception e) {
+            log.error("Error calling agent at {}: {}", fullUrl, e.getMessage());
+            return null;
+        }
     }
 }

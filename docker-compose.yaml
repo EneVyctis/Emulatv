@@ -41,6 +41,8 @@ services:
       - emulatv-api
     networks:
       - emulatv
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   ui_build:
