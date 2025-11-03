@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emulatv.emulatv_api.util.KeySimulator;
+import com.emulatv.emulatv_api.util.AgentHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/navigation")
 @CrossOrigin(origins = "*")
 public class VolumeController {
-    private KeySimulator keySimulator;
+    private AgentHandler agentHandler;
 
-    public VolumeController(KeySimulator keySimulator){
-        this.keySimulator = keySimulator;
+    public VolumeController(AgentHandler agentHandler){
+        this.agentHandler = agentHandler;
     }
 
     @GetMapping("/volume/up")
     public void volumeUp() {
-        keySimulator.getRequest("/navigation/volume/up");
+        agentHandler.getRequest("/navigation/volume/up");
     }
 
     @GetMapping("/volume/down")
     public void volumeDown() {
-        keySimulator.getRequest("/navigation/volume/down");
+        agentHandler.getRequest("/navigation/volume/down");
     }
     
     

@@ -4,7 +4,7 @@
 AGENT_DIR="./emulatv-agent"
 AGENT_SCRIPT="index.js"
 COMPOSE_FILE="docker-compose.yaml"
-APP_URL="http://localhost"
+APP_URL="http://localhost/ui/"
 
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"

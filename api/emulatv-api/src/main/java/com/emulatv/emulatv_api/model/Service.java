@@ -1,15 +1,28 @@
 package com.emulatv.emulatv_api.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@Table(name="service")
 public class Service {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @Column(nullable = false)
     private String website;
 
-    public Service(){
-        this.id = -1;
-        this.name = "";
-        this.website = "";
-    }
+    // Managed by JPA
+    public Service(){}
 
     public Service(int id, String name, String website){
         this.id = id;
@@ -17,19 +30,19 @@ public class Service {
         this.website = website;
     }
 
-    public int getID(){
+    public long getId(){
         return this.id;
     }
 
     public String getName(){
-        return this.name.toString();
+        return this.name;
     }
 
     public String getWebsite(){
-        return this.website.toString();
+        return this.website;
     }
 
-    public void setID(int id){
+    public void setId(int id){
         this.id = id;
     }
 
