@@ -11,13 +11,6 @@ Another part of this project is for me to familiarize with full stack web develo
 
 # How to run
 
-Copy this repo on your computer.
-
-First you will need to set-up **your own postgresql database** see [the postgresql documentation](https://www.postgresql.org/docs/18/index.html) for more informations. 
-
-Then go to api/emulatv-api/src/main/resources/application.properties and changes username and password according to your local settings.
-Do not forget to change postgresql configuration files in order to accept connections from docker's network. Range of ip may vary for each indivual so check for yourself. 
-
 **When the database set-up is completed**: 
 
 *Make sure you have docker installed on your device.*
@@ -26,6 +19,8 @@ Do not forget to change postgresql configuration files in order to accept connec
 chmod u+x run-emulatv.sh
 ./run-emulatv.sh
 ```
+
+**Warning** Postgresql uses a docker volume to ensure persistence, make sure not to erase it if you don't want to loose any data.
 
 # How to use
 

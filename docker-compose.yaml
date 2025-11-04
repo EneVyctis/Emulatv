@@ -25,8 +25,21 @@ services:
       - NODE_API_PORT=3001
     networks:
       - emulatv
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:latest
+    container_name: emulatv-database
+    volumes:
+     - postgres_data:/var/lib/postgres/data
+    environment:
+      POSTGRES_USER: emulatv
+      POSTGRES_PASSWORD: emulatv
+      POSTGRES_DB: emulatv
+    networks:
+      - emulatv
+    restart: unless-stopped
 
   nginx:
     image: nginx:latest
@@ -50,6 +63,7 @@ services:
 volumes:
   ui_build:
   remote_build:
+  postgres_data:
 
 networks: 
   emulatv: 
