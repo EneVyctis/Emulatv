@@ -21,17 +21,17 @@ public class NavigationController {
             agentHandler.getRequest("/navigation/next");
         }
 
-                @GetMapping("/previous")
+        @GetMapping("/previous")
         public void previous() {
             agentHandler.getRequest("/navigation/previous");
         }
 
-                @GetMapping("/enter")
+        @GetMapping("/enter")
         public void enter() {
             agentHandler.getRequest("/navigation/enter");
         }
 
-                @GetMapping("/escape")
+        @GetMapping("/escape")
         public void escape() {
             agentHandler.getRequest("/navigation/escape");
         }
