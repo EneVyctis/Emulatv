@@ -11,8 +11,6 @@ Another part of this project is for me to familiarize with full stack web develo
 
 # How to run
 
-**When the database set-up is completed**: 
-
 *Make sure you have docker installed on your device.*
 
 ```sh
