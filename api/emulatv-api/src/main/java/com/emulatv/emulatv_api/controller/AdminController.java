@@ -28,12 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "*")
 public class AdminController {
     
-    @Autowired
     private ServiceRepository serviceRepository;
     private AgentHandler agentHandler;
 
-    public AdminController(AgentHandler agentHandler){
+    public AdminController(AgentHandler agentHandler, ServiceRepository serviceRepository){
         this.agentHandler = agentHandler;
+        this.serviceRepository = serviceRepository;
     }
     
     RestTemplate restTemplate = new RestTemplate();
