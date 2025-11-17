@@ -1,9 +1,10 @@
 # Emulatv 
 
-Emulatv is a little project for my personal use (but you are free to use it of course :D). It aims to emulate a TV App and made services (such as Netflix, Youtube etc...) accessible. 
-I want it to run on a micro controller such as a Raspberry Pi, my personal phone (or any phones within the same network) would act as a tv controller. 
+Emulatv is a little project for my personal use (but you are free to use it of course :D). It aims to emulate a TV App and make services (such as Netflix, Youtube etc...) accessible. 
+I initially had the idea to make it runs on an raspberry Pi but, because it needs to manage the display and use a web browser, i gave up on that restriction (since my own raspebrry is only 1Gb of ram).  
+It may work on a more performant raspberry, but it is no longer something i'm aiming for.
 
-Another part of this project is for me to familiarize with full stack web development and deploiement. 
+Another part of this project is for me to familiarize with full stack web development and deploiement. Thus I chose to architecture everything as micro-services runnable on dockers.
 
 # Warning 
 
@@ -12,6 +13,10 @@ Another part of this project is for me to familiarize with full stack web develo
 # How to run
 
 *Make sure you have docker installed on your device.*
+
+Clone the present repository and navigate into the project's folder.
+
+Then, run the run-emulatv script to start, on a linux : 
 
 ```sh
 chmod u+x run-emulatv.sh
