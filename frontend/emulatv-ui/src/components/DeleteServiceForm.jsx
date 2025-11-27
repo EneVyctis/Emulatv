@@ -14,7 +14,7 @@ function DeleteServiceForm(){
 
         try{
             const response = await fetch('/api/admin/delete-service', {
-                method: 'POST',
+                method: 'DELETE',
                 body: name,
             });
 

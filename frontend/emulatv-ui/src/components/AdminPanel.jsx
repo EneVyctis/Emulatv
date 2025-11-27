@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddServiceForm from "./AddServiceForm";
 import DeleteServiceForm from "./DeleteServiceForm";
+import ManageServices from "./ManageServices";
 
 export default function AdminPanel() {
   const [activeForm, setActiveForm] = useState("add");
@@ -34,12 +35,22 @@ export default function AdminPanel() {
             >
             Delete service
             </li>
+            <li style={{ 
+              marginBottom: "0.5rem",
+              cursor: "pointer",
+              color: activeForm === "manage"? "blue" : "black",
+            }}
+            onClick={() => setActiveForm("manage")}
+            >
+            Manage Services
+            </li>
         </ul>
       </div>
             <div style={{flex: 1, padding: "2rem" }}>
             <h1>Admin Panel</h1>
             {activeForm === "add" && <AddServiceForm />}
             {activeForm === "delete" && <DeleteServiceForm />}
+            {activeForm === "manage" && <ManageServices />}
             </div>
     </div>
   );

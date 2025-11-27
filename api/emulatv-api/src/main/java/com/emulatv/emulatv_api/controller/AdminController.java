@@ -18,7 +18,11 @@ import com.emulatv.emulatv_api.repository.ServiceRepository;
 import com.emulatv.emulatv_api.util.AgentHandler;
 import com.emulatv.emulatv_api.util.MultipartInputStreamFileResource;
 
+import jakarta.persistence.OptimisticLockException;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -69,7 +73,6 @@ public class AdminController {
         if ( !response.getStatusCode().is2xxSuccessful()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Agent has not accepted the file" + response.getBody());
         }
-
         Service service = new Service();
         service.setName(name);
         service.setWebsite(website);
@@ -78,4 +81,19 @@ public class AdminController {
         return ResponseEntity.ok("Service has been successfully added !");
     }
     
+    @DeleteMapping("/delete-service/{id}")
+    public ResponseEntity<?> deleteService(
+        @PathVariable Long id
+    ){
+        try{
+            serviceRepository.deleteById(id);
+        } catch(IllegalArgumentException e ){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch(OptimisticLockException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+        return ResponseEntity.ok("Service has been successfully deleted");
+    }
+
 }
