@@ -5,8 +5,7 @@ export default function ManageServices() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchServices = async () => {
+    const fetchServices = async () => {
             try {
                 const response = await fetch('/api/list/services', {
                     method: 'GET',
@@ -23,15 +22,20 @@ export default function ManageServices() {
             }
         };
 
+    useEffect(() => {
         fetchServices();
     }, []);
 
     if (loading) {
-        return <p>Chargement en cours...</p>;
+        return <p>Loading...</p>;
     }
 
     if (error) {
-        return <p>Erreur : {error}</p>;
+        return <p>Error : {error}</p>;
+    }
+
+    if (services.length == 0 ){
+        return <p>No service found</p>
     }
 
 
@@ -54,9 +58,10 @@ export default function ManageServices() {
             }
 
             console.log('Service deleted !');
-
+            
             setError('');
 
+            await fetchServices();
         } catch(err) {
             setError(err.message);
         }
